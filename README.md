@@ -1,1 +1,1 @@
-# liferay-automatic-order-flow
+# Automatic Order Flow
