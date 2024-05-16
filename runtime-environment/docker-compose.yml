@@ -1,0 +1,34 @@
+version: "3.7"
+name: liferay-automatic-order-flow
+services:
+  laof-liferay:
+    image: liferay/dxp:2024.q1.5
+    container_name: laof-liferay
+    environment:
+      LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
+      LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
+      LIFERAY_JVM_OPTS: "-Xms2560m -Xmx4096m"
+      # Used by .config files to create client extensions as remote apps in Liferay Control Panel
+    networks: 
+      - laof-network
+    ports: 
+      - 8080:8080
+      - 127.0.0.1:11311:11311
+    volumes:
+      - ./liferay-74/mount:/mnt/liferay
+      - laof-liferay-tools:/opt/liferay/tools
+      - laof-liferay-data:/opt/liferay/data
+      - laof-liferay-osgi-configs:/opt/liferay/osgi/configs
+      - laof-liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
+      - laof-liferay-osgi-modules:/opt/liferay/osgi/modules
+      - laof-liferay-osgi-war:/opt/liferay/osgi/war
+networks:
+  laof-network:
+    name: laof-network
+volumes:
+  laof-liferay-data:
+  laof-liferay-tools:
+  laof-liferay-osgi-configs:
+  laof-liferay-osgi-marketplace:
+  laof-liferay-osgi-modules:
+  laof-liferay-osgi-war:
