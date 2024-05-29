@@ -1,0 +1,15 @@
+assemble:
+    - from: batch
+      into: batch
+products:
+    name: Products Batch
+    oAuthApplicationHeadlessServer: products-batch-oauth-application-headless-server
+    type: batch
+products-batch-oauth-application-headless-server:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: Products Batch OAuth Application Headless Server
+    scopes:
+        - Liferay.Headless.Commerce.Admin.Catalog.everything
+        - Liferay.Headless.Batch.Engine.everything
+    type: oAuthApplicationHeadlessServer

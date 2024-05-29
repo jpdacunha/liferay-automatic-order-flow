@@ -1,0 +1,50 @@
+{
+  "configuration": {
+    "className": "com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product",
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "INSERT",
+      "importStrategy": "ON_ERROR_FAIL",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "PARTIAL_UPDATE"
+    }
+  },
+  "items": [
+    {
+      "active": true,
+      "name": {
+        "en_US": "Product A",
+        "fr_FR": "Produit A"
+      },
+      "catalogId": 31895,
+      "productType": "simple"
+    },
+    {
+      "active": true,
+      "name": {
+        "en_US": "Product B",
+        "fr_FR": "Produit B"
+      },
+      "catalogId": 31895,
+      "productType": "simple"
+    },
+    {
+      "active": true,
+      "name": {
+        "en_US": "Product C",
+        "fr_FR": "Produit C"
+      },
+      "catalogId": 31895,
+      "productType": "simple"
+    },
+    {
+      "active": true,
+      "name": {
+        "en_US": "Product D",
+        "fr_FR": "Produit D"
+      },
+      "catalogId": 31895,
+      "productType": "simple"
+    }
+  ]
+}

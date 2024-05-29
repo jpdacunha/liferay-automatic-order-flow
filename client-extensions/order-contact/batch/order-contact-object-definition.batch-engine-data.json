@@ -1,0 +1,234 @@
+{
+  "actions": {
+    "createBatch": {
+      "href": "/o/headless-batch-engine/v1.0/import-task/com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition",
+      "method": "POST"
+    }
+  },
+  "configuration": {
+    "className": "com.liferay.object.admin.rest.dto.v1_0.ObjectDefinition",
+    "companyId": 0,
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    },
+    "userId": 0,
+    "version": "v1.0"
+  },
+  "items": [
+    {
+      "accountEntryRestricted": false,
+      "actions": {
+        "delete": {
+        },
+        "get": {
+        },
+        "permissions": {
+        },
+        "update": {
+        }
+      },
+      "active": true,
+      "defaultLanguageId": "en_US",
+      "enableCategorization": true,
+      "enableComments": false,
+      "enableLocalization": false,
+      "enableObjectEntryDraft": false,
+      "enableObjectEntryHistory": false,
+      "externalReferenceCode": "ORDER_CONTACT",
+      "label": {
+        "en_US": "Order Contact"
+      },
+      "name": "OrderContact",
+      "objectActions": [
+      ],
+      "objectFields": [
+        {
+          "businessType": "Text",
+          "DBType": "String",
+          "externalReferenceCode": "3473b60f-faa5-dd48-b788-b4fdab651fbf",
+          "indexed": false,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "Author"
+          },
+          "localized": false,
+          "name": "creator",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "true",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "String",
+          "unique": false
+        },
+        {
+          "businessType": "Date",
+          "DBType": "Date",
+          "externalReferenceCode": "5987b820-7566-20e6-4ba6-092e1669ceb3",
+          "indexed": false,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "Create Date"
+          },
+          "localized": false,
+          "name": "createDate",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "true",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "Date",
+          "unique": false
+        },
+        {
+          "businessType": "Text",
+          "DBType": "String",
+          "externalReferenceCode": "dc932a04-b632-d19b-3619-d6b00ab9903f",
+          "indexed": false,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "External Reference Code"
+          },
+          "localized": false,
+          "name": "externalReferenceCode",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "false",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "String",
+          "unique": false
+        },
+        {
+          "businessType": "LongInteger",
+          "DBType": "Long",
+          "externalReferenceCode": "d6343d02-84c0-8951-d0ad-c85c6ec5839a",
+          "indexed": true,
+          "indexedAsKeyword": true,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "ID"
+          },
+          "localized": false,
+          "name": "id",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "true",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "Long",
+          "unique": false
+        },
+        {
+          "businessType": "Date",
+          "DBType": "Date",
+          "externalReferenceCode": "75f2a97a-b3de-51fc-561a-b36646b6c807",
+          "indexed": false,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "Modified Date"
+          },
+          "localized": false,
+          "name": "modifiedDate",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "true",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "Date",
+          "unique": false
+        },
+        {
+          "businessType": "Text",
+          "DBType": "String",
+          "externalReferenceCode": "1eb71099-6aab-e4f7-b790-d73f288d03fe",
+          "indexed": false,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "",
+          "label": {
+            "en_US": "Status"
+          },
+          "localized": false,
+          "name": "status",
+          "objectFieldSettings": [
+          ],
+          "readOnly": "true",
+          "readOnlyConditionExpression": "",
+          "required": false,
+          "state": false,
+          "system": true,
+          "type": "String",
+          "unique": false
+        },
+        {
+          "businessType": "LongText",
+          "DBType": "Clob",
+          "externalReferenceCode": "307aacf2-ff97-3c9b-6c5f-c57765dfe2f5",
+          "indexed": true,
+          "indexedAsKeyword": false,
+          "indexedLanguageId": "en_US",
+          "label": {
+            "en_US": "Description"
+          },
+          "localized": false,
+          "name": "description",
+          "objectFieldSettings": [
+            {
+              "name": "showCounter",
+              "value": false
+            }
+          ],
+          "readOnly": "false",
+          "readOnlyConditionExpression": "",
+          "required": true,
+          "state": false,
+          "system": false,
+          "type": "Clob",
+          "unique": false
+        }
+      ],
+      "objectFolderExternalReferenceCode": "default",
+      "objectLayouts": [
+      ],
+      "objectRelationships": [
+      ],
+      "objectValidationRules": [
+      ],
+      "objectViews": [
+      ],
+      "panelCategoryKey": "control_panel.object",
+      "parameterRequired": false,
+      "pluralLabel": {
+        "en_US": "OrderContacts"
+      },
+      "portlet": true,
+      "restContextPath": "/o/c/ordercontacts",
+      "scope": "company",
+      "status": {
+        "code": 0,
+        "label": "approved",
+        "label_i18n": "Approved"
+      },
+      "system": false,
+      "titleObjectFieldName": "id"
+    }
+  ]
+}
