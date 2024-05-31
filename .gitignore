@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!runtime-environment/liferay-74/mount/files/tomcat/lib/*.jar
 *.war
 *.nar
 *.ear
