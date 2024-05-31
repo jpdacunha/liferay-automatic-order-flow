@@ -17,12 +17,11 @@ import org.osgi.service.component.annotations.Reference;
  * 
  * NICE TIPS : :-)
  * 
- * see https://git-dxp.gfi.fr/root/BNPPhenix/tree/master/sources/phenix-liferay/phenix-liferay-workspace/modules/phenix-common/phenix-common-upgrade/src/main/java/com/bnpparibas/phenix/common/upgrade
  * 
  * To restart an already executed chain of upgrade processes
  *  1 - use following SQL :
- *    select * from release_ where servletcontextname like '%phenix%';
- *    delete from release_ where releaseid='<ID>';
+ *    select * from Release_ where servletContextName='automatic.order.flow.upgrade';
+ *    delete from Release_ where releaseid='<RELEASE_ID';
  *    
  *  2 - Restart Liferay
  *  

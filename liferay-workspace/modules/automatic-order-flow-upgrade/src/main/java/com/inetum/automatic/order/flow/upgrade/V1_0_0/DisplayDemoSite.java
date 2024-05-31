@@ -1,34 +1,33 @@
 package com.inetum.automatic.order.flow.upgrade.V1_0_0;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
-import com.liferay.portal.kernel.model.Group;
-import com.liferay.portal.kernel.model.GroupConstants;
-import com.liferay.portal.kernel.service.GroupServiceUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.site.initializer.SiteInitializer;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-
 
 public class DisplayDemoSite extends UpgradeProcess{
+	
+	private static final String SITE_INITIALIZER_KEY = "site.initializer.key";
 	private static final Log LOGGER = LogFactoryUtil.getLog(DisplayDemoSite.class);
 	
 	@Override
 	protected void doUpgrade() throws Exception {
 		
 		LOGGER.info("Starting DisplayDemoSite");
+		
+		/*Bundle bundle = FrameworkUtil.getBundle(SiteInitializer.class);
+		BundleContext bundleContext = bundle.getBundleContext();
+		
+		try (ServiceTrackerMap<String, SiteInitializer> serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap( bundleContext, SiteInitializer.class, SITE_INITIALIZER_KEY);) {
+			
+		}*/
+		
 		/*
 		
 		String demoSiteName = "demo-automatic-order-flow";
@@ -68,6 +67,7 @@ public class DisplayDemoSite extends UpgradeProcess{
 				serviceTrackerMap.close();
 			} catch(Exception e) {
 				System.out.println( e.getClass().getName() + " - " + e.getMessage());
+				LOGGER.error(e.getMessage, e);
 				}	
 		}
 
