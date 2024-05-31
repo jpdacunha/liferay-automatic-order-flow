@@ -2,15 +2,16 @@ version: "3.7"
 name: liferay-automatic-order-flow
 services:
   laof-liferay:
-    image: liferay/dxp:2024.q1.5
+    build:
+      dockerfile: liferay-74/Dockerfile
+      context: .
+      args:
+        - BASE_IMAGE=liferay/dxp:2024.q1.5
     container_name: laof-liferay
+    env_file:
+      - ./liferay-74/variables.env
     environment:
-      LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
-      LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
       LIFERAY_JVM_OPTS: "-Xms2560m -Xmx4096m"
-      # Used by .config files to create client extensions as remote apps in Liferay Control Panel
-    networks: 
-      - laof-network
     ports: 
       - 8080:8080
       - 127.0.0.1:11311:11311
@@ -22,9 +23,18 @@ services:
       - laof-liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - laof-liferay-osgi-modules:/opt/liferay/osgi/modules
       - laof-liferay-osgi-war:/opt/liferay/osgi/war
-networks:
-  laof-network:
-    name: laof-network
+    depends_on:
+      - db
+    entrypoint: /usr/local/bin/wait-for -t 60 db:3306 -- /usr/local/bin/liferay_entrypoint.sh
+  db:
+    image: mysql:8
+    env_file:
+      - ./mysql/variables.env
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - db_data:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
 volumes:
   laof-liferay-data:
   laof-liferay-tools:
@@ -32,3 +42,4 @@ volumes:
   laof-liferay-osgi-marketplace:
   laof-liferay-osgi-modules:
   laof-liferay-osgi-war:
+  db_data:
