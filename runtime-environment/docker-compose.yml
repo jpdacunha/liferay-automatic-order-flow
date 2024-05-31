@@ -4,11 +4,12 @@ services:
   laof-liferay:
     image: liferay/dxp:2024.q1.5
     container_name: laof-liferay
+    depends_on:
+      - laof-bdd
     environment:
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
       LIFERAY_JVM_OPTS: "-Xms2560m -Xmx4096m"
-      # Used by .config files to create client extensions as remote apps in Liferay Control Panel
     networks: 
       - laof-network
     ports: 
@@ -22,6 +23,19 @@ services:
       - laof-liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - laof-liferay-osgi-modules:/opt/liferay/osgi/modules
       - laof-liferay-osgi-war:/opt/liferay/osgi/war
+  laof-bdd:
+    image: mysql:5.7.29
+    container_name: laof-mysql
+    networks:
+      - laof-network
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./mysql/config/lportal.sql:/docker-entrypoint-initdb.d/lportal.sql
+      - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - mysql:/var/lib/mysql
 networks:
   laof-network:
     name: laof-network
@@ -32,3 +46,4 @@ volumes:
   laof-liferay-osgi-marketplace:
   laof-liferay-osgi-modules:
   laof-liferay-osgi-war:
+  mysql:
