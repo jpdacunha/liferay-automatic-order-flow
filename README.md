@@ -33,13 +33,15 @@ By breaking down the steps, you ensure a clear and organized approach to setting
     $ cd ../runtime-environment
     $ ./deploy.sh
         
-# Start project (you should respect order to launch project without problem)
+# Start project   
+(you should respect order to launch project without problem)
     
     $ cd ./runtime-environment
     $ ./startDb.sh
     $ ./startPortal.sh
         
-# Stop project (you should respect order to launch project without problem)
+# Stop project 
+(you should respect order to launch project without problem)
     
         $ cd ./runtime-environment
         $ ./stopPortal.sh
