@@ -39,6 +39,8 @@ By breaking down the steps, you ensure a clear and organized approach to setting
     $ cd ./runtime-environment
     $ ./startDb.sh
     $ ./startPortal.sh
+
+You can now log in from http://localhost:8080/ to Liferay. Tap "test" as name and password then you should change it.
         
 # Stop project 
 (you should respect order to launch project without problem)
