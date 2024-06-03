@@ -15,7 +15,7 @@ This workflow illustrates the steps to automate the processing of a product orde
 
 # Step 2: Create the Workflow
 
-    Using Flow Wise or n8n: Develop the workflow using either Flow Wise or n8n to manage the processes and interactions between the created objects.
+    Using Flow Wise or n8n: Develop the workflow using either Flow Wise or n8n to manage the processes and interactions between created objects.
 
 By breaking down the steps, you ensure a clear and organized approach to setting up and automating your local environment on Liferay.
 
