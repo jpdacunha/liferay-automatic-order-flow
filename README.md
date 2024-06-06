@@ -23,6 +23,7 @@ This workflow illustrates the steps to automate the processing of a product orde
     $ cd ./runtime-environment
     $ ./startDb.sh
     $ ./startPortal.sh
+    if you are login for the first time: tap "test" as name and password then you should change it.
         
 ## Stop project 
 (you should respect order to launch project without problem)
@@ -30,10 +31,6 @@ This workflow illustrates the steps to automate the processing of a product orde
         $ cd ./runtime-environment
         $ ./stopPortal.sh
         $ ./stopDb.sh
-
-You can now log in from http://localhost:8080/ to Liferay.
-if you are login for the first time: tap "test" as name and password then you should change it.
-
 
 # Utils
 
