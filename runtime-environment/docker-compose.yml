@@ -37,6 +37,30 @@ services:
       - ./mysql/config/lportal.sql:/docker-entrypoint-initdb.d/lportal.sql
       - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql:/var/lib/mysql
+  flowise:
+    image: flowiseai/flowise:latest
+    command: /bin/sh -c "sleep 3; flowise start"
+    container_name: flowiseai
+    networks:
+      - laof-network
+    hostname: flowise
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./flowiseai:/root/.flowise
+    environment:
+      DEBUG: false
+      PORT: 3000
+      FLOWISE_USERNAME: inetumuser
+      FLOWISE_PASSWORD: inetumpass
+      APIKEY_PATH: /root/.flowise
+      SECRETKEY_PATH: /root/.flowise
+      LOG_LEVEL: info
+      LOG_PATH: /root/.flowise/logs
+      DATABASE_TYPE: sqlite
+      DATABASE_PATH: /root/.flowise
 networks:
   laof-network:
     name: laof-network
