@@ -23,7 +23,8 @@ This workflow illustrates the steps to automate the processing of a product orde
     $ cd ./runtime-environment
     $ ./startDb.sh
     $ ./startPortal.sh
-    if you are login for the first time: tap "test" as name and password then you should change it.
+
+if you are login for the first time: tap "test" as name and password then you should change it.
         
 ## Stop project 
 (you should respect order to launch project without problem)
