@@ -7,22 +7,22 @@ This workflow illustrates the steps to automate the processing of a product orde
 
 ## Build
     
-    $ cd ./runtime-environment
-    $ ./build.sh
+        $ cd ./runtime-environment
+        $ ./build.sh
         
 ## Deploy
     
-    $ cd ./liferay-workspace
-    $ ./gradlew deploy
-    $ cd ../runtime-environment
-    $ ./deploy.sh
+        $ cd ./liferay-workspace
+        $ ./gradlew deploy
+        $ cd ../runtime-environment
+        $ ./deploy.sh
         
 ## Start project   
 (you should respect order to launch project without problem)
     
-    $ cd ./runtime-environment
-    $ ./startDb.sh
-    $ ./startPortal.sh
+        $ cd ./runtime-environment
+        $ ./startDb.sh
+        $ ./startPortal.sh
 
 if you are login for the first time: tap "test" as name and password then you should change it.
         
