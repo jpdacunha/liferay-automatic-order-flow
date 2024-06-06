@@ -39,7 +39,9 @@ if you are login for the first time: tap "test" as name and password then you sh
 
 ## Portals
 
-| Service | title | links | |----------|:-------------:|------:| | Liferay| http://localhost:8080/ | URL of Liferay portal|
+| Service | title | links | 
+|----------|:-------------:|------:|
+| Liferay| http://localhost:8080/ | URL of Liferay portal|
 
 
 
