@@ -49,7 +49,12 @@ services:
     ports:
       - 3000:3000
     volumes:
+      - ./flowise/api.json:/root/.flowise/api.json
+      - ./flowise/settings.json:/root/.flowise/settings.json
+      - ./flowise/database.sqlite:/root/.flowise/database.sqlite
+      - ./flowise/encryption.key:/root/.flowise/encryption.key
       - ./flowiseai:/root/.flowise
+      - laof-flowise:/root/.flowise
     environment:
       DEBUG: false
       PORT: 3000
@@ -73,4 +78,4 @@ volumes:
   laof-liferay-osgi-modules:
   laof-liferay-osgi-war:
   mysql:
-
+  laof-flowise:
