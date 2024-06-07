@@ -37,13 +37,13 @@ services:
       - ./mysql/config/lportal.sql:/docker-entrypoint-initdb.d/lportal.sql
       - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql:/var/lib/mysql
-  flowise:
+  laof-flowise:
     image: flowiseai/flowise:latest
     command: /bin/sh -c "sleep 3; flowise start"
     container_name: flowiseai
     networks:
       - laof-network
-    hostname: flowise
+    hostname: laof-flowise
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://localhost:3000
     ports:
