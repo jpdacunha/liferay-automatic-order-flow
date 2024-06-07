@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 	)
 public class OrderContactListener extends BaseModelListener<AssetEntry>{
 	private static final Log LOGGER = LogFactoryUtil.getLog(OrderContactListener.class);
-    private static final String FLOWISE_ENDPOIT="http://flowise:3000/api/v1/prediction/2db83ed9-9ad0-4868-a21e-d4454d0f8cae";
+    private static final String FLOWISE_ENDPOIT="http://laof-flowise:3000/api/v1/prediction/2db83ed9-9ad0-4868-a21e-d4454d0f8cae";
     @Override
 	public void onAfterUpdate(AssetEntry originalModel, AssetEntry model) throws ModelListenerException {
 		
