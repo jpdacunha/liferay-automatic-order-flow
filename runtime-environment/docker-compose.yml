@@ -55,6 +55,7 @@ services:
       PORT: 3000
       FLOWISE_USERNAME: inetumuser
       FLOWISE_PASSWORD: inetumpass
+      FLOWISE_SECRETKEY_OVERWRITE: inetumpass
       APIKEY_PATH: /root/.flowise
       SECRETKEY_PATH: /root/.flowise
       LOG_LEVEL: info
