@@ -7,6 +7,8 @@ import com.liferay.object.service.ObjectDefinitionLocalServiceUtil;
 import com.liferay.object.service.ObjectEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
@@ -36,7 +38,7 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
     private static final String FLOWISE_ENDPOIT="http://laof-flowise:3000/api/v1/prediction/2db83ed9-9ad0-4868-a21e-d4454d0f8cae";
     @Override
 	public void onAfterUpdate(AssetEntry originalModel, AssetEntry model) throws ModelListenerException {
-		
+
 		LOGGER.info("Updating  Object ["+model.getClassName()+"] ...");
 		
 		//If ObjectDefinition
@@ -69,7 +71,7 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
 	}
     
 	private void callFlowise(String requestQuestion) {
-		try {
+		try {			
             // Creating a URL object
             URL url = new URL(FLOWISE_ENDPOIT);
             
@@ -81,9 +83,12 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
             connection.setRequestProperty("Content-Type", "application/json");
             
             //Send parameter in
+            JSONObject jsonRequestParam=JSONFactoryUtil.createJSONObject();
+            jsonRequestParam.put("question", requestQuestion);
+            
             connection.setDoOutput(true);
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-            out.writeBytes("{\"question\": \""+requestQuestion+"\"}");
+            out.writeBytes(jsonRequestParam.toJSONString());
             out.flush();
             out.close();
             
