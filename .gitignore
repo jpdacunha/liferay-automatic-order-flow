@@ -27,4 +27,4 @@ replay_pid*
 /.metadata/
 /RemoteSystemsTempFiles/
 #Ignore flowise repository (with logs, sqlite db, ...)
-/runtime-environment/flowiseai/
+#/runtime-environment/flowiseai/
