@@ -38,9 +38,7 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
     private static final String FLOWISE_ENDPOIT="http://laof-flowise:3000/api/v1/prediction/2db83ed9-9ad0-4868-a21e-d4454d0f8cae";
     @Override
 	public void onAfterUpdate(AssetEntry originalModel, AssetEntry model) throws ModelListenerException {
-
-		LOGGER.info("Updating  Object ["+model.getClassName()+"] ...");
-		
+	
 		//If ObjectDefinition
 		if(model.getClassName().startsWith(ObjectDefinition.class.getName())) {
 			
@@ -60,7 +58,9 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
 					LOGGER.info("Desciption ["+valuesMap.get("description")+"] ...");
 					
 					//Calling flowise
-					callFlowise(valuesMap.get("description").toString());
+					StringBuilder description = new StringBuilder(valuesMap.get("description").toString());
+					description.append("\n\n Envois la commande a liferay.");
+					callFlowise(description.toString());
 				}
 				
 			} catch (PortalException e) {
@@ -84,7 +84,13 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
             
             //Send parameter in
             JSONObject jsonRequestParam=JSONFactoryUtil.createJSONObject();
+            JSONObject vars=JSONFactoryUtil.createJSONObject();
+            vars.put("accountId", 36829);
+            vars.put("channelId", 32406);
             jsonRequestParam.put("question", requestQuestion);
+            jsonRequestParam.put("overrideConfig", vars);
+            
+            LOGGER.info("jsonRequestParam : "+jsonRequestParam.toJSONString());
             
             connection.setDoOutput(true);
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());

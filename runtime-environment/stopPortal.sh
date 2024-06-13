@@ -1,5 +1,5 @@
 
 #!/bin/bash
 
-echo " Stopping Portal"
+echo " Stopping Liferay..."
 sudo docker compose down laof-liferay
