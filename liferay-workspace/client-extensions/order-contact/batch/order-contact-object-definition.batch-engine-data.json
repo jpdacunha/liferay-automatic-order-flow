@@ -203,6 +203,50 @@
           "system": false,
           "type": "Clob",
           "unique": false
+        }, {
+            "indexed": true,
+            "localized": false,
+            "objectFieldSettings": [{
+                    "name": "showCounter",
+                    "value": false
+                }
+            ],
+            "readOnly": "false",
+            "DBType": "Clob",
+            "label": {
+                "en_US": "IA Message"
+            },
+            "type": "Clob",
+            "required": false,
+            "externalReferenceCode": "4c9728f4-bdd6-d5f1-1acc-3f6d1556d5a4",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "en_US",
+            "unique": false,
+            "name": "iAMessage",
+            "state": false,
+            "businessType": "LongText",
+            "readOnlyConditionExpression": ""
+        }, {
+            "indexed": true,
+            "localized": false,
+            "objectFieldSettings": [],
+            "readOnly": "false",
+            "DBType": "Long",
+            "label": {
+                "en_US": "orderId"
+            },
+            "type": "Long",
+            "required": false,
+            "externalReferenceCode": "29fe31bf-bbb9-8dc5-a659-5da8ed0e32cd",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "",
+            "unique": false,
+            "name": "orderId",
+            "state": false,
+            "businessType": "LongInteger",
+            "readOnlyConditionExpression": ""
         }
       ],
       "objectFolderExternalReferenceCode": "default",
