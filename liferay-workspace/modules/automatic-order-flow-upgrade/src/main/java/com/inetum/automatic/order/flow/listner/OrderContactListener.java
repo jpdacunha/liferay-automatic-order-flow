@@ -1,6 +1,8 @@
 package com.inetum.automatic.order.flow.listner;
 
+import com.liferay.account.service.AccountEntryLocalServiceUtil;
 import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
 import com.liferay.object.model.ObjectDefinition;
 import com.liferay.object.model.ObjectEntry;
 import com.liferay.object.service.ObjectDefinitionLocalServiceUtil;
@@ -35,9 +37,10 @@ import org.osgi.service.component.annotations.Component;
 	)
 public class OrderContactListener extends BaseModelListener<AssetEntry>{
 	private static final Log LOGGER = LogFactoryUtil.getLog(OrderContactListener.class);
-    private static final String FLOWISE_ENDPOIT="http://laof-flowise:3000/api/v1/prediction/2db83ed9-9ad0-4868-a21e-d4454d0f8cae";
-    @Override
-	public void onAfterUpdate(AssetEntry originalModel, AssetEntry model) throws ModelListenerException {
+    private static final String FLOWISE_ENDPOIT="http://laof-flowise:3000/api/v1/prediction/65d366ad-9d26-479d-8674-bdcb9d99a474";
+   
+	@Override
+	public void onAfterCreate(AssetEntry model) throws ModelListenerException {
 	
 		//If ObjectDefinition
 		if(model.getClassName().startsWith(ObjectDefinition.class.getName())) {
@@ -55,22 +58,33 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
 				//If OrderContact Object
 				if(objectDefinition.getName().equals("C_OrderContact")) {					
 					Map<String, Serializable> valuesMap=objectEntry.getValues();
-					LOGGER.info("Desciption ["+valuesMap.get("description")+"] ...");
+					LOGGER.info("Channel : "+CommerceChannelLocalServiceUtil.getCommerceChannels(-1, -1).get(0).getCommerceChannelId());
 					
 					//Calling flowise
 					StringBuilder description = new StringBuilder(valuesMap.get("description").toString());
+					long contactOrderId=Long.parseLong(valuesMap.get("c_orderContactId").toString());
+					long accountId = AccountEntryLocalServiceUtil.getAccountEntries(-1, -1).get(0).getAccountEntryId();
+					long channelId = CommerceChannelLocalServiceUtil.getCommerceChannels(-1, -1).get(0).getCommerceChannelId();
 					description.append("\n\n Envois la commande a liferay.");
-					callFlowise(description.toString());
+					
+					//Calling Flowise in new Thread
+					Thread newThread = new Thread() {
+					    public void run() {
+					        	callFlowise(description.toString(),contactOrderId,accountId,channelId);					      
+					    }  
+					};
+					newThread.start();
+					
 				}
 				
 			} catch (PortalException e) {
 				e.printStackTrace();
 			}
 		}
-		super.onAfterUpdate(originalModel, model);
+		super.onAfterCreate(model);
 	}
     
-	private void callFlowise(String requestQuestion) {
+	private void callFlowise(String requestQuestion,long contactOrderId,long accountId,long channelId) {
 		try {			
             // Creating a URL object
             URL url = new URL(FLOWISE_ENDPOIT);
@@ -84,11 +98,17 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
             
             //Send parameter in
             JSONObject jsonRequestParam=JSONFactoryUtil.createJSONObject();
+            JSONObject overrideConfig=JSONFactoryUtil.createJSONObject();
             JSONObject vars=JSONFactoryUtil.createJSONObject();
-            vars.put("accountId", 36829);
-            vars.put("channelId", 32406);
+            
+            vars.put("accountId", accountId);
+            vars.put("channelId", channelId);
+            vars.put("contactOrderId", contactOrderId);
+            
+            overrideConfig.put("vars", vars);
+            
             jsonRequestParam.put("question", requestQuestion);
-            jsonRequestParam.put("overrideConfig", vars);
+            jsonRequestParam.put("overrideConfig", overrideConfig);
             
             LOGGER.info("jsonRequestParam : "+jsonRequestParam.toJSONString());
             
@@ -100,7 +120,7 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
             
             // Retrieving the response code
             int responseCode = connection.getResponseCode();
-
+            
             // Processing the response
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -113,6 +133,7 @@ public class OrderContactListener extends BaseModelListener<AssetEntry>{
                 in.close();
 
                 LOGGER.info("API Response: " + response.toString());
+            		
             } else {
             	LOGGER.warn("API Call Failed. Response Code: " + responseCode);
             }
