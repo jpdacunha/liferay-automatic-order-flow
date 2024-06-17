@@ -170,7 +170,7 @@
           "name": "status",
           "objectFieldSettings": [
           ],
-          "readOnly": "true",
+          "readOnly": "false",
           "readOnlyConditionExpression": "",
           "required": false,
           "state": false,
@@ -246,6 +246,26 @@
             "name": "orderId",
             "state": false,
             "businessType": "LongInteger",
+            "readOnlyConditionExpression": ""
+        }, {
+            "indexed": true,
+            "localized": false,
+            "objectFieldSettings": [],
+            "readOnly": "false",
+            "DBType": "String",
+            "label": {
+                "en_US": "Order Generation Status"
+            },
+            "type": "String",
+            "required": false,
+            "externalReferenceCode": "efb34d2c-276c-74aa-4b1e-9aeaeb8a5b4e",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "en_US",
+            "unique": false,
+            "name": "orderGeneration",
+            "state": false,
+            "businessType": "Text",
             "readOnlyConditionExpression": ""
         }
       ],
