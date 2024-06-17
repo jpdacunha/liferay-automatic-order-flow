@@ -1,4 +1,5 @@
 package com.inetum.automatic.order.flow.upgrade;
+import com.liferay.account.service.AccountEntryLocalServiceUtil;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -70,22 +71,26 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 		LOGGER.info("Creating and initializing default site ...");
 		
 		long companyId = PortalUtil.getDefaultCompanyId();
-	
+		long userId =0;
+		ServiceContext serviceContext =null;
 		Group group = groupLocalService.fetchFriendlyURLGroup(companyId, SITE_FRIENDLY_URL);
+		int accountCount=AccountEntryLocalServiceUtil.getAccountEntriesCount();
 		
-		if (group == null) {
+		try {
 			
-			try {
-				
+			if (group == null || accountCount == 0) {
+					
 				User user = getFirstLiferayAdmin(companyId);
-				long userId = user.getUserId();
+				userId = user.getUserId();
 				
 				PermissionCheckerUtil.setThreadValues(user);
 				
-				ServiceContext serviceContext = new ServiceContext();
+				serviceContext = new ServiceContext();
 				serviceContext.setUserId(userId);
 				serviceContext.setCompanyId(companyId);
-				
+			}
+			
+			if (group == null) {	
 				Locale locale = LocaleUtil.getDefault();
 				
 				Map<Locale, String> siteNameMap = new HashMap<Locale, String>();
@@ -104,17 +109,24 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 				}
 				
 				LOGGER.info("Site successfully created.");
-				
-			} catch (SystemException | PortalException e) {
-				LOGGER.error(e.getMessage(), e);
+					
+			} else {
+				LOGGER.info("Skipping default site creation because it already exists.");
 			}
-
-		} else {
-			LOGGER.info("Skipping default site creation because it already exists.");
-		}
+		 
+			if (accountCount == 0) {
+				LOGGER.info("Creating and initializing default Account ...");
+				
+				//Create Flowise Account
+				AccountEntryLocalServiceUtil.addAccountEntry(userId, 0, "Flowise Account", "", null, "", null, "", "business", 0, serviceContext);
+				
+				LOGGER.info("Account successfully created.");
+			}
 		
 		LOGGER.info("Done.");
-		
+		} catch (SystemException | PortalException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 	}
     
 	private User getFirstLiferayAdmin(long companyId) throws SystemException, PortalException {
