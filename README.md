@@ -37,10 +37,10 @@ if you are login for the first time: tap "test" as name and password then you sh
 
 ## Portals
 
-| Service | title | links | 
-|----------|:-------------:|------:|
-| Liferay| http://localhost:8080/ | URL of Liferay portal|
-| Flowise| http://localhost:3000/ | URL of Flowise|
+| Service | title | links |credentials | 
+|----------|:-------------:|------:|------:|
+| Liferay| http://localhost:8080/ | URL of Liferay portal|test/test|
+| Flowise| http://localhost:3000/ | URL of Flowise|inetumuser/inetumpass|
 
 
 
