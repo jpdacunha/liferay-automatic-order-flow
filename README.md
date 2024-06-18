@@ -43,6 +43,20 @@ if you are login for the first time: tap "test" as name and password then you sh
 | Flowise| http://localhost:3000/ | URL of Flowise|inetumuser/inetumpass|
 
 
+## TODO
+### Step 01 : Ameliorations
+- Indenter le code JS 
+- Gérer l'erreur en cas de création de la commande si possible avec un if/else
+- Ajouter des commentaires
+- Renommer le flow : Automatic Order Flow
+- Mettre des noms parlants sur les étapes.
+
+### Step 02 : Low Code
+ - Ajouter une action au lieu du model listener / supprimer le code JAVA 
+ - Voir pour gérer les status en utilisant une picklist (s'inspirer de l'exemple de la DevCon) => Ne pas utiliser l'état system
+ - 
+
+
 
 
 

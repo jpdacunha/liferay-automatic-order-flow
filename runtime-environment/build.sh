@@ -5,4 +5,4 @@ sudo docker compose build
 
 echo " Building Liferay workspace plugins ..."
 cd ../liferay-workspace/
-./gradlew deploy
+./gradlew clean deploy

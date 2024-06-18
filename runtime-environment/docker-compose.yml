@@ -38,7 +38,7 @@ services:
       - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
       - mysql:/var/lib/mysql
   laof-flowise:
-    image: flowiseai/flowise:latest
+    image: flowiseai/flowise:1.8.1
     command: /bin/sh -c "sleep 3; flowise start"
     container_name: flowiseai
     networks:
