@@ -45,10 +45,13 @@ if you are login for the first time: tap "test" as name and password then you sh
 # Use cases
 | Scenario/System prompt| Links |
 |----------|:-------------:|
-| P| [System prompt](https://linktodocumentation)|
-| S1| [Nominal scenario](https://linktodocumentation)|
-| S2| [One or more products are not available](https://linktodocumentation)|
-| S3| [All products are not available](https://linktodocumentation)|
+| P| [System prompt](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/SystemPrompt)|
+| S1| [Nominal scenario](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S1)|
+| S2| [One or more products are not available](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S2)|
+| S3| [All products are not available](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S3)|
+| S4| [Missing information](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S4)|
+
+
 
 ## TODO
 ### Step 01 : Ameliorations
