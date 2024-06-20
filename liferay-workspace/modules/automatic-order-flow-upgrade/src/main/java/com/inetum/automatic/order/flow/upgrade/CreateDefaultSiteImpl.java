@@ -1,5 +1,5 @@
 package com.inetum.automatic.order.flow.upgrade;
-import com.liferay.account.service.AccountEntryLocalServiceUtil;
+import com.liferay.account.service.AccountEntryLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -59,6 +59,9 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
     @Reference
 	private UserLocalService userLocalService;
     
+    @Reference
+	private AccountEntryLocalService accountEntryLocalService;
+    
     private static final String SITE_NAME = "Automatic Order Demo";
     private static final String SITE_FRIENDLY_URL = "/automatic-order-demo";
     private static final String SITE_MINIUM_INITIALIZER_KEY = "minium-initializer";
@@ -74,7 +77,7 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 		long userId =0;
 		ServiceContext serviceContext =null;
 		Group group = groupLocalService.fetchFriendlyURLGroup(companyId, SITE_FRIENDLY_URL);
-		int accountCount=AccountEntryLocalServiceUtil.getAccountEntriesCount();
+		int accountCount=accountEntryLocalService.getAccountEntriesCount();
 		
 		try {
 			
@@ -118,7 +121,7 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 				LOGGER.info("Creating and initializing default Account ...");
 				
 				//Create Flowise Account
-				AccountEntryLocalServiceUtil.addAccountEntry(userId, 0, "Flowise Account", "", null, "", null, "", "business", 0, serviceContext);
+				accountEntryLocalService.addAccountEntry(userId, 0, "Flowise Account", "", null, "", null, "", "business", 0, serviceContext);
 				
 				LOGGER.info("Account successfully created.");
 			}
