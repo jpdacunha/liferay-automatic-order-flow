@@ -42,6 +42,13 @@ if you are login for the first time: tap "test" as name and password then you sh
 | Liferay| http://localhost:8080/ | URL of Liferay portal|test/test|
 | Flowise| http://localhost:3000/ | URL of Flowise|inetumuser/inetumpass|
 
+# Use cases
+| Scenario/System prompt| Links |
+|----------|:-------------:|
+| P| [System prompt](https://linktodocumentation)|
+| S1| [Nominal scenario](https://linktodocumentation)|
+| S2| [One or more products are not available](https://linktodocumentation)|
+| S3| [All products are not available](https://linktodocumentation)|
 
 ## TODO
 ### Step 01 : Ameliorations
