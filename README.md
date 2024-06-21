@@ -42,6 +42,16 @@ if you are login for the first time: tap "test" as name and password then you sh
 | Liferay| http://localhost:8080/ | URL of Liferay portal|test/test|
 | Flowise| http://localhost:3000/ | URL of Flowise|inetumuser/inetumpass|
 
+# Use cases
+| Scenario/System prompt| Links |
+|----------|:-------------:|
+| P| [System prompt](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/SystemPrompt)|
+| S1| [Nominal scenario](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S1)|
+| S2| [One or more products are not available](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S2)|
+| S3| [All products are not available](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S3)|
+| S4| [Missing information](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S4)|
+
+
 
 ## TODO
 ### Step 01 : Ameliorations
