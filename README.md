@@ -39,8 +39,9 @@ if you are login for the first time: tap "test" as name and password then you sh
 
 | Service | title | links |credentials | 
 |----------|:-------------:|------:|------:|
-| Liferay| http://localhost:8080/ | URL of Liferay portal|test/test|
-| Flowise| http://localhost:3000/ | URL of Flowise|inetumuser/inetumpass|
+| Liferay| http://localhost:8080/ |URL of Liferay portal | test/test |
+| Flowise| http://localhost:3000/ |URL of Flowise | inetumuser/inetumpass |
+| Flowise| http://localhost:5678/ |URL of n8n | demo@inetum.com/Inetum2024 |
 
 # Use cases
 | Scenario/System prompt| Links |
@@ -52,19 +53,6 @@ if you are login for the first time: tap "test" as name and password then you sh
 | S4| [Missing information](https://github.com/jpdacunha/liferay-automatic-order-flow/blob/main/S4)|
 
 
-
-## TODO
-### Step 01 : Ameliorations
-- Indenter le code JS 
-- Gérer l'erreur en cas de création de la commande si possible avec un if/else
-- Ajouter des commentaires
-- Renommer le flow : Automatic Order Flow
-- Mettre des noms parlants sur les étapes.
-
-### Step 02 : Low Code
- - Ajouter une action au lieu du model listener / supprimer le code JAVA 
- - Voir pour gérer les status en utilisant une picklist (s'inspirer de l'exemple de la DevCon) => Ne pas utiliser l'état system
- - 
 
 
 
