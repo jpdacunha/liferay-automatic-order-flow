@@ -43,7 +43,28 @@
         "en_US": "Order Contact"
       },
       "name": "OrderContact",
-      "objectActions": [
+      "objectActions": [{
+            "conditionExpression": "",
+            "objectActionExecutorKey": "webhook",
+            "errorMessage": {},
+            "active": true,
+            "description": "",
+            "label": {
+                "en_US": "Call n8n"
+            },
+            "externalReferenceCode": "CALL_N8N_AFTER_ADD_ACTION",
+            "system": false,
+            "objectActionTriggerKey": "onAfterAdd",
+            "name": "callN8n",
+            "parameters": {
+                "url": "http://laof-n8n:5678/webhook/3b240618-796c-4a9e-a70a-b842fa528672"
+            },
+            "status": {
+                "label_i18n": "Never Ran",
+                "code": 0,
+                "label": "never-ran"
+            }
+        }
       ],
       "objectFields": [
         {
