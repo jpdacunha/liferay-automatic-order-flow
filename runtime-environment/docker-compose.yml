@@ -63,6 +63,25 @@ services:
       LOG_PATH: /root/.flowise/logs
       DATABASE_TYPE: sqlite
       DATABASE_PATH: /root/.flowise
+  laof-n8n:
+    image: docker.n8n.io/n8nio/n8n
+    container_name: laof-n8n
+    networks:
+      - laof-network
+    restart: always
+    ports:
+      - 5678:5678
+    environment:
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - N8N_ENCRYPTION_KEY=Inetum2024
+      - NODE_ENV=production
+      - N8N_BASIC_AUTH_USER=demo@inetum.com
+      - N8N_BASIC_AUTH_PASSWORD=Inetum2024
+    volumes:
+      - laof-n8n:/home/node/.n8n
+      - ./n8n/database.sqlite:/home/node/.n8n/database.sqlite
+      
 networks:
   laof-network:
     name: laof-network
@@ -74,3 +93,4 @@ volumes:
   laof-liferay-osgi-modules:
   laof-liferay-osgi-war:
   mysql:
+  laof-n8n:
