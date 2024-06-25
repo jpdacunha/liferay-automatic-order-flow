@@ -39,9 +39,9 @@ if you are login for the first time: tap "test" as name and password then you sh
 
 | Service | title | links |credentials | 
 |----------|:-------------:|------:|------:|
-| Liferay| http://localhost:8080/ |URL of Liferay portal | test/test |
-| Flowise| http://localhost:3000/ |URL of Flowise | inetumuser/inetumpass |
-| Flowise| http://localhost:5678/ |URL of n8n | demo@inetum.com/Inetum2024 |
+| Liferay| http://localhost:8080/ |URL of Liferay portal|test/test|
+| Flowise| http://localhost:3000/ |URL of Flowise|inetumuser/inetumpass|
+| Flowise| http://localhost:5678/ |URL of n8n|demo@inetum.com/Inetum2024|
 
 # Use cases
 | Scenario/System prompt| Links |
