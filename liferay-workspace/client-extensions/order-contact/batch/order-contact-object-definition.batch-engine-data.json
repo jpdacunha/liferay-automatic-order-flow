@@ -64,6 +64,50 @@
                 "code": 0,
                 "label": "never-ran"
             }
+        }, {
+            "conditionExpression": "orderGenerationStatus==\"generated\"",
+            "objectActionExecutorKey": "notification",
+            "errorMessage": {},
+            "active": true,
+            "description": "",
+            "label": {
+                "en_US": "Send Notification when order is generated"
+            },
+            "externalReferenceCode": "SEND_NOTIFICATION_WHEN_ORDER_GENERATED",
+            "system": false,
+            "objectActionTriggerKey": "onAfterUpdate",
+            "name": "sendNotificationWhenOrderIsGenerated",
+            "parameters": {
+                "notificationTemplateExternalReferenceCode": "ORDER_GENERATED_NOTIFICATION",
+                "type": "userNotification"
+            },
+            "status": {
+                "label_i18n": "Never Ran",
+                "code": 0,
+                "label": "never-ran"
+            }
+        }, {
+            "conditionExpression": "orderGenerationStatus==\"notGenerated\"",
+            "objectActionExecutorKey": "notification",
+            "errorMessage": {},
+            "active": true,
+            "description": "",
+            "label": {
+                "en_US": "Send Notification when unable to generate order"
+            },
+            "externalReferenceCode": "SEND_NOTIFICATION_WHEN_ORDER_NOT_GENERATED",
+            "system": false,
+            "objectActionTriggerKey": "onAfterUpdate",
+            "name": "sendNotificationWhenUnableToGenerateOrder",
+            "parameters": {
+                "notificationTemplateExternalReferenceCode": "UNABLE_TO_GENERATE_ORDER_NOTIFICATION",
+                "type": "userNotification"
+            },
+            "status": {
+                "label_i18n": "Never Ran",
+                "code": 0,
+                "label": "never-ran"
+            }
         }
       ],
       "objectFields": [

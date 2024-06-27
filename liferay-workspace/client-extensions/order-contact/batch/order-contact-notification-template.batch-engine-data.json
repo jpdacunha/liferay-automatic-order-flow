@@ -26,7 +26,7 @@
 	      "body": {},
 	      "description": "",
 	      "editorType": "richText",
-	      "externalReferenceCode": "SEND_ORDER_STATUS",
+	      "externalReferenceCode": "ORDER_GENERATED_NOTIFICATION",
 	      "name": "Order successfully added",
 	      "name_i18n": {
 	        "en_US": "Order successfully added"
@@ -41,6 +41,32 @@
 	      ],
 	      "subject": {
 	        "en_US": "Order [ [%ORDERCONTACT_ORDERID%] ] added successfully by IA"
+	      },
+	      "system": false,
+	      "type": "userNotification",
+	      "typeLabel": "User Notification"
+	    },{
+	      "actions": {},
+	      "attachmentObjectFieldExternalReferenceCodes": [],
+	      "attachmentObjectFieldIds": [],
+	      "body": {},
+	      "description": "",
+	      "editorType": "richText",
+	      "externalReferenceCode": "UNABLE_TO_GENERATE_ORDER_NOTIFICATION",
+	      "name": "Unable to generate order",
+	      "name_i18n": {
+	        "en_US": "Unable to generate order"
+	      },
+	      "objectDefinitionExternalReferenceCode": "",
+	      "objectDefinitionId": 0,
+	      "recipientType": "role",
+	      "recipients": [
+	        {
+	          "roleName": "User"
+	        }
+	      ],
+	      "subject": {
+	        "en_US": "Unable to generate order, [%ORDERCONTACT_IAMESSAGE%]"
 	      },
 	      "system": false,
 	      "type": "userNotification",
