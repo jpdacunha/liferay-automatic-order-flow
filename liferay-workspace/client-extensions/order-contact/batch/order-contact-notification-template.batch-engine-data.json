@@ -1,0 +1,50 @@
+{
+  "actions": {
+    "createBatch": {
+      "href": "/o/headless-batch-engine/v1.0/import-task/com.liferay.notification.rest.dto.v1_0.NotificationTemplate",
+      "method": "POST"
+    }
+  },
+  "configuration": {
+    "className": "com.liferay.notification.rest.dto.v1_0.NotificationTemplate",
+    "companyId": 0,
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    },
+    "userId": 0,
+    "version": "v1.0"
+  },
+  "items": [
+        {
+	      "actions": {},
+	      "attachmentObjectFieldExternalReferenceCodes": [],
+	      "attachmentObjectFieldIds": [],
+	      "body": {},
+	      "description": "",
+	      "editorType": "richText",
+	      "externalReferenceCode": "SEND_ORDER_STATUS",
+	      "name": "Order successfully added",
+	      "name_i18n": {
+	        "en_US": "Order successfully added"
+	      },
+	      "objectDefinitionExternalReferenceCode": "",
+	      "objectDefinitionId": 0,
+	      "recipientType": "role",
+	      "recipients": [
+	        {
+	          "roleName": "User"
+	        }
+	      ],
+	      "subject": {
+	        "en_US": "Order [ [%ORDERCONTACT_ORDERID%] ] added successfully by IA"
+	      },
+	      "system": false,
+	      "type": "userNotification",
+	      "typeLabel": "User Notification"
+	    }
+  ]
+}
