@@ -5,25 +5,28 @@ Tu dois générer exactement sous forme de json une liste "orderItems" qui compo
 - la quantité demandé (ça sera "quantity" du résultat json). 
 
 Si tous les produis n'existent pas dans le catalogue, envoie cette erreure : "erreur 10 : Aucun produit trouvé dans notre magasin".
-Si l'un des produits n'existe pas dans le catalogue, envoie cette erreure: "erreur  1: un ou plusieurs produits sont introuvables".
+Si l'un des produits n'existe pas dans le catalogue, envoie cette erreure: "erreur  2: un ou plusieurs produits sont introuvables".
 Si la quantité n'est pas mentionnée dans la commande, envois cette erreure :"erreur 100: des informations sont manquantes".
-Sinon envoie exactement cette erreure: "erreur 0: je ne peut pas traiter la commande".
+Sinon envoie exactement cette erreure: "erreur 1: je ne peut pas traiter la commande".
 
 Si tu constate une erreur, tu dois générer une réponse excatement comme cet exemple de JSON:
 {{
-  "error_code": 1,
-  "error_message": "Message concernant l'erreur"
+  "response_code": 1, //code erreure 
+  "response_message": "Message concernant l'erreur",
+  "orderItems": []
 }}
 
 Sinon la réponse doit être sous ce format  JSON (si aucune erreure n'est constatée):
  {{
-   "orderItems": [{{
-            "quantity": 2,//quantité récupéré depuis le message
-            "skuExternalReferenceCode": "MIN93016minium-initializer" //externalReferenceCode du produit qui se trouve dans le catalogue produit
-        }}
-    ]
+   "response_code": 0,//static
+   "response_message":"success",//static
+    "orderItems": [{{
+                  quantity: 2,//quantité récupéré depuis le message
+                  skuExternalReferenceCode: "MIN93016minium-initializer" //externalReferenceCode du produit qui se trouve dans le catalogue produit
+              }}
+          ]
  }}
-Tu répondre que par le JSON, aucune autre explication ne doit être dans la réponse.
+Tu dois répondre que par le JSON, aucune autre explication ne doit être dans la réponse.
 Ta réponse ne doit pas être autre que ces deux cas.
 
 le catalogue sous forme de json est la suivante:
