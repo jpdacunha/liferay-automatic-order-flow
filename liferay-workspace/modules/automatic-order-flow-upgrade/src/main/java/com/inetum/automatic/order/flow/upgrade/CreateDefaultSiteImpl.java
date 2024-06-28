@@ -90,8 +90,7 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 						serviceContext.setUserId(userId);
 						serviceContext.setCompanyId(companyId);
 		
-						LOGGER.info("Creating and initializing default site ...");
-					
+						LOGGER.info("Creating and initializing default site ...");					
 					
 						Locale locale = LocaleUtil.getDefault();
 						
@@ -99,33 +98,26 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 						siteNameMap.put(locale, SITE_NAME);
 						
 						Bundle bundle = FrameworkUtil.getBundle(SiteInitializer.class);
-						BundleContext bundleContext = bundle.getBundleContext();
-						
+						BundleContext bundleContext = bundle.getBundleContext();						
 						
 				    	SiteInitializer siteInitializer=null;
-						int attempt=0;
+						int attempt=1;
 						ServiceTrackerMap<String, SiteInitializer> serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap( bundleContext, SiteInitializer.class, SITE_INITIALIZER_KEY);
+						
 						//Attempting to initialize the site
 						while(siteInitializer==null && attempt<=5) {
 							try {
-								System.out.println("Attempt "+attempt+" to initialising site...");
+								LOGGER.info("Attempt "+attempt+" to initialising site...");
 								siteInitializer = serviceTrackerMap.getService(SITE_MINIUM_INITIALIZER_KEY);
-								System.out.println("siteInitializer : "+siteInitializer);
-								System.out.println("serviceTrackerMap : "+serviceTrackerMap);
-								System.out.println("userId : "+userId);
 								
 								if(siteInitializer!=null) {
 									try{
-										System.out.println(" 		##### Creating Site ...");
 										Group grp = groupLocalService.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID, siteNameMap, siteNameMap, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, SITE_FRIENDLY_URL, true, false, true, serviceContext);
-			
 										siteInitializer.initialize(grp.getGroupId());
+										
 										LOGGER.info("Site successfully created.");
 									}catch(PortalException e) {
 										e.printStackTrace();
-										// stop the main thread for 30 seconds
-										Thread.sleep(30000);
-										attempt++;
 									}
 								}else {
 									// stop the main thread for 30 seconds
@@ -142,8 +134,6 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
 				} else {
 					LOGGER.info("Skipping default site creation because it already exists.");
 				}
-		 
-			//}
 		
 		LOGGER.info("Done.");
 		} catch (Exception  e ) {
