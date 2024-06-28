@@ -1,0 +1,33 @@
+{
+  "actions": {
+    "createBatch": {
+      "href": "/o/headless-batch-engine/v1.0/import-task/com.liferay.headless.admin.user.dto.v1_0.Account",
+      "method": "POST"
+    }
+  },
+  "configuration": {
+    "className": "com.liferay.headless.admin.user.dto.v1_0.Account",
+    "companyId": 0,
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "taskItemDelegateName": "DEFAULT",
+      "updateStrategy": "UPDATE"
+    },
+    "userId": 0,
+    "version": "v1.0"
+  },
+  "items": [
+            {
+		      "dateCreated": "2024-06-28T15:21:25Z",
+		      "dateModified": "2024-06-28T15:21:25Z",
+		      "externalReferenceCode": "INETUM_DEFAULT_ACCOUNT",
+		      "logoId": 0,
+		      "logoURL": "/image/organization_logo?img_id=0&t=1719587748304",
+		      "name": "INETUM Default Account",
+		      "taxId": "",
+		      "type": "business"
+		    }
+  ]
+}

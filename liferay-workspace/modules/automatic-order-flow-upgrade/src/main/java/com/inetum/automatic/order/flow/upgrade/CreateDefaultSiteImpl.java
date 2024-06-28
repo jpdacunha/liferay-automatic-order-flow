@@ -70,69 +70,88 @@ public class CreateDefaultSiteImpl implements CreateDefaultSite {
     @Activate
     @Modified
     protected void activate(Map<String, Object> properties) {
-
-		LOGGER.info("Creating and initializing default site ...");
 		
 		long companyId = PortalUtil.getDefaultCompanyId();
-		long userId =0;
-		ServiceContext serviceContext =null;
+	
 		Group group = groupLocalService.fetchFriendlyURLGroup(companyId, SITE_FRIENDLY_URL);
-		int accountCount=accountEntryLocalService.getAccountEntriesCount();
 		
 		try {
 			
-			if (group == null || accountCount == 0) {
-					
+			if (group == null) {
 				User user = getFirstLiferayAdmin(companyId);
-				userId = user.getUserId();
+				final long userId = user.getUserId();
 				
-				PermissionCheckerUtil.setThreadValues(user);
+				new Thread() {
+				    public void run() {	
 				
-				serviceContext = new ServiceContext();
-				serviceContext.setUserId(userId);
-				serviceContext.setCompanyId(companyId);
-			}
+						PermissionCheckerUtil.setThreadValues(user);
+						
+						final ServiceContext serviceContext = new ServiceContext();
+						serviceContext.setUserId(userId);
+						serviceContext.setCompanyId(companyId);
+		
+						LOGGER.info("Creating and initializing default site ...");
+					
+					
+						Locale locale = LocaleUtil.getDefault();
+						
+						Map<Locale, String> siteNameMap = new HashMap<Locale, String>();
+						siteNameMap.put(locale, SITE_NAME);
+						
+						Bundle bundle = FrameworkUtil.getBundle(SiteInitializer.class);
+						BundleContext bundleContext = bundle.getBundleContext();
+						
+						
+				    	SiteInitializer siteInitializer=null;
+						int attempt=0;
+						ServiceTrackerMap<String, SiteInitializer> serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap( bundleContext, SiteInitializer.class, SITE_INITIALIZER_KEY);
+						//Attempting to initialize the site
+						while(siteInitializer==null && attempt<=5) {
+							try {
+								System.out.println("Attempt "+attempt+" to initialising site...");
+								siteInitializer = serviceTrackerMap.getService(SITE_MINIUM_INITIALIZER_KEY);
+								System.out.println("siteInitializer : "+siteInitializer);
+								System.out.println("serviceTrackerMap : "+serviceTrackerMap);
+								System.out.println("userId : "+userId);
+								
+								if(siteInitializer!=null) {
+									try{
+										System.out.println(" 		##### Creating Site ...");
+										Group grp = groupLocalService.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID, siteNameMap, siteNameMap, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, SITE_FRIENDLY_URL, true, false, true, serviceContext);
 			
-			if (group == null) {	
-				Locale locale = LocaleUtil.getDefault();
-				
-				Map<Locale, String> siteNameMap = new HashMap<Locale, String>();
-				siteNameMap.put(locale, SITE_NAME);
-				
-				Group grp = groupLocalService.addGroup(userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, null, 0, GroupConstants.DEFAULT_LIVE_GROUP_ID, siteNameMap, siteNameMap, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, SITE_FRIENDLY_URL, true, false, true, serviceContext);
-				
-				Bundle bundle = FrameworkUtil.getBundle(SiteInitializer.class);
-				BundleContext bundleContext = bundle.getBundleContext();
-				
-				try (ServiceTrackerMap<String, SiteInitializer> serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap( bundleContext, SiteInitializer.class, SITE_INITIALIZER_KEY);) {
-					
-					SiteInitializer siteInitializer = serviceTrackerMap.getService(SITE_MINIUM_INITIALIZER_KEY);
-					siteInitializer.initialize(grp.getGroupId());
-					
+										siteInitializer.initialize(grp.getGroupId());
+										LOGGER.info("Site successfully created.");
+									}catch(PortalException e) {
+										e.printStackTrace();
+										// stop the main thread for 30 seconds
+										Thread.sleep(30000);
+										attempt++;
+									}
+								}else {
+									// stop the main thread for 30 seconds
+									Thread.sleep(30000);
+									attempt++;
+								}
+							} catch (InterruptedException e1) {
+								e1.printStackTrace();
+							}
+						}			      
+					  }  
+					}.start();
+						
+				} else {
+					LOGGER.info("Skipping default site creation because it already exists.");
 				}
-				
-				LOGGER.info("Site successfully created.");
-					
-			} else {
-				LOGGER.info("Skipping default site creation because it already exists.");
-			}
 		 
-			if (accountCount == 0) {
-				LOGGER.info("Creating and initializing default Account ...");
-				
-				//Create Flowise Account
-				accountEntryLocalService.addAccountEntry(userId, 0, "Flowise Account", "", null, "", null, "", "business", 0, serviceContext);
-				
-				LOGGER.info("Account successfully created.");
-			}
+			//}
 		
 		LOGGER.info("Done.");
-		} catch (SystemException | PortalException e) {
+		} catch (Exception  e ) {
 			LOGGER.error(e.getMessage(), e);
 		}
 	}
     
-	private User getFirstLiferayAdmin(long companyId) throws SystemException, PortalException {
+	private final User getFirstLiferayAdmin(long companyId) throws SystemException, PortalException {
 		
 		Role adminRole = roleLocalService.getRole(companyId, RoleConstants.ADMINISTRATOR);
 		
