@@ -5,7 +5,8 @@ services:
     image: liferay/dxp:2024.q1.5
     container_name: laof-liferay
     depends_on:
-      - laof-bdd
+      laof-bdd:
+        condition: service_healthy
     environment:
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_DELAY: 10
       LIFERAY_RETRY_PERIOD_JDBC_PERIOD_ON_PERIOD_STARTUP_PERIOD_MAX_PERIOD_RETRIES: 10
@@ -24,19 +25,31 @@ services:
       - laof-liferay-osgi-marketplace:/opt/liferay/osgi/marketplace
       - laof-liferay-osgi-modules:/opt/liferay/osgi/modules
       - laof-liferay-osgi-war:/opt/liferay/osgi/war
+      
   laof-bdd:
-    image: mysql:5.7.29
     container_name: laof-mysql
     networks:
       - laof-network
-    ports:
-      - 3307:3306
+    image: mysql:8
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lportal
+      MYSQL_USER: liferay
+      MYSQL_PASSWORD: liferay
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
     volumes:
-      - ./mysql/config/lportal.sql:/docker-entrypoint-initdb.d/lportal.sql
-      - ./mysql/config/my.cnf:/etc/mysql/conf.d/my.cnf
-      - mysql:/var/lib/mysql
+      - laof-mysql:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+      start_period: 10s
+      
   laof-flowise:
     image: flowiseai/flowise:1.8.2
     restart: always
@@ -91,5 +104,5 @@ volumes:
   laof-liferay-osgi-marketplace:
   laof-liferay-osgi-modules:
   laof-liferay-osgi-war:
-  mysql:
+  laof-mysql:
   laof-n8n:

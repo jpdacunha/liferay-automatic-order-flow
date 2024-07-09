@@ -14,9 +14,9 @@
 		auth="Container" 
 		type="javax.sql.DataSource" 
 		driverClassName="com.mysql.cj.jdbc.Driver" 
-		url="jdbc:mysql://laof-bdd/lportal74laof?useUnicode=true&amp;characterEncoding=UTF-8" 
-		username="root" 
-		password="password" 
+		url="jdbc:mysql://laof-bdd/lportal?characterEncoding=UTF-8&amp;dontTrackOpenResources=true&amp;holdResultsOpenOverStatementClose=true&amp;serverTimezone=GMT&amp;useFastDateParsing=false&amp;useUnicode=true" 
+		username="liferay" 
+		password="liferay" 
 		maxActive="20"
 		validationQuery="Select 1" 
 	/>
