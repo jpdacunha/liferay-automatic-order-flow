@@ -2,6 +2,7 @@ version: "3.7"
 name: liferay-automatic-order-flow
 services:
   laof-liferay:
+    hostname: laof-liferay
     image: liferay/dxp:2024.q1.5
     container_name: laof-liferay
     depends_on:
@@ -27,6 +28,7 @@ services:
       - laof-liferay-osgi-war:/opt/liferay/osgi/war
       
   laof-bdd:
+    hostname: laof-bdd
     container_name: laof-mysql
     networks:
       - laof-network
@@ -77,6 +79,7 @@ services:
       DATABASE_TYPE: sqlite
       DATABASE_PATH: /root/.flowise
   laof-n8n:
+    hostname: laof-n8n
     image: docker.n8n.io/n8nio/n8n
     container_name: laof-n8n
     networks:
